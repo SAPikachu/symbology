@@ -152,6 +152,7 @@ namespace barnode {
 
     // text to display
     copyArgStr(*args[13], (char*)&symbol->text[0], sizeof(symbol->text));
+    copyArgStr(*args[14], (char*)&symbol->primary[0], sizeof(symbol->primary));
 
     return symbol;
   }

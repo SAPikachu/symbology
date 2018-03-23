@@ -28,7 +28,8 @@ var defaultSymbol = {
   option1: -1,
   option2: -1,
   option3: -1,
-  show_hrt: 1 // show human-readable text
+  show_hrt: 1, // show human-readable text
+  primary: ""
   // input_mode: BINARY_MODE,
 };
 
@@ -78,7 +79,8 @@ function createSymbology(symbologyStruct, barcodeData, fnName) {
     symbologyStruct.option3,
     // symbologyStruct.showHrt,
     // symbologyStruct.input_mode,
-    (symbologyStruct.text || barcodeData)
+    (symbologyStruct.text || barcodeData),
+    symbologyStruct.primary
   );
 }
 
