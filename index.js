@@ -44,7 +44,7 @@ function validateSymbol(symbologyStruct) {
   var keys = Object.keys(defaultSymbol);
 
   for(var i=0; i<keys.length; i++) {
-    if(!symbologyStruct[keys[i]]) {
+    if(symbologyStruct[keys[i]] === undefined) {
       symbologyStruct[keys[i]] = defaultSymbol[keys[i]];
     }
   }
