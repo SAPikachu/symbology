@@ -125,6 +125,7 @@ namespace barnode {
     option_1 = argToInt(*args[10]);
     option_2 = argToInt(*args[11]);
     option_3 = argToInt(*args[12]);
+    show_hrt = argToInt(*args[13]);
     output_options = argToInt(*args[5]);
 
     if(option_1 > -1) {
@@ -142,6 +143,7 @@ namespace barnode {
     if(scale > 0) {
       symbol->scale = scale;
     }
+    symbol->show_hrt = show_hrt;
 
     // colors
     copyArgStr(*args[7], (char*)&symbol->fgcolour[0], sizeof(symbol->fgcolour));
@@ -151,8 +153,8 @@ namespace barnode {
     copyArgStr(*args[8], (char*)&symbol->outfile[0], sizeof(symbol->outfile));
 
     // text to display
-    copyArgStr(*args[13], (char*)&symbol->text[0], sizeof(symbol->text));
-    copyArgStr(*args[14], (char*)&symbol->primary[0], sizeof(symbol->primary));
+    copyArgStr(*args[14], (char*)&symbol->text[0], sizeof(symbol->text));
+    copyArgStr(*args[15], (char*)&symbol->primary[0], sizeof(symbol->primary));
 
     return symbol;
   }
