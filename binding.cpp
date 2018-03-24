@@ -118,7 +118,7 @@ namespace barnode {
     symbol->border_width = argToInt(*args[4]);
 
     // options (-1 indicates not set)
-    int option_1, option_2, option_3, output_options;
+    int option_1, option_2, option_3, output_options, show_hrt;
     float scale;
 
     scale = argToFloat(*args[9]);
