@@ -61,10 +61,13 @@ namespace barnode {
    * Renders symbology and returns an object with PNG bitmap data, EPS binary data, or SVG XML.
    */
   Local<Object> createStreamHandle(Isolate* isolate, zint_symbol *symbol, uint8_t *data, char *str) {
-    int status_code = ZBarcode_Encode_and_Print(symbol, data, 0, 0);
+    // int status_code = ZBarcode_Encode_and_Print(symbol, data, 0, 0);
 
     Local<Object> obj = Object::New(isolate);
-
+    obj->Set(String::NewFromUtf8(isolate, "inputData"), String::NewFromUtf8(isolate, str));
+    obj->Set(String::NewFromUtf8(isolate, "message"), String::NewFromUtf8(isolate, "Not implemented"));
+    obj->Set(String::NewFromUtf8(isolate, "code"), v8::Integer::New(isolate, ZINT_ERROR_INVALID_OPTION));
+    /*
     if(status_code <= 2) {
       int fileNameLength = strlen(symbol->outfile);
 
@@ -85,7 +88,7 @@ namespace barnode {
     obj->Set(String::NewFromUtf8(isolate, "inputData"), String::NewFromUtf8(isolate, str));
     obj->Set(String::NewFromUtf8(isolate, "message"), String::NewFromUtf8(isolate, symbol->errtxt));
     obj->Set(String::NewFromUtf8(isolate, "code"), v8::Integer::New(isolate, status_code));
-
+    */
     return obj;
   }
 
