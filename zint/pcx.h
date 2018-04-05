@@ -1,8 +1,7 @@
-/* large.h - Handles binary manipulation of large numbers */
+/*  pcx.h - header structure for ZSoft PCX files
 
-/*
     libzint - the open source barcode library
-    Copyright (C) 2008-2017 Robin Stuart <rstuart114@gmail.com>
+    Copyright (C) 2016-2017 Robin Stuart <rstuart114@gmail.com>
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions
@@ -28,25 +27,51 @@
     LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
     OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
     SUCH DAMAGE.
-*/
-#ifndef __LARGE_H
-#define __LARGE_H
+ */
+
+#ifndef PCX_H
+#define PCX_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif /* __cplusplus */
+#endif
 
-extern void binary_load(short int reg[], char data[], const size_t src_len);
-extern void binary_add(short int accumulator[], short int input_buffer[]);
-extern void binary_subtract(short int accumulator[], short int input_buffer[]);
-extern void shiftdown(short int buffer[]);
-extern void shiftup(short int buffer[]);
-extern short int islarger(short int accum[], short int reg[]);
-extern void binary_multiply(short int reg[], char data[]);
+#ifdef _MSC_VER
+#include <windows.h>
+#include "stdint_msvc.h"
+#else
+#include <stdint.h>
+#endif
+
+#pragma pack (1)
+
+    typedef struct pcx_header {
+        uint8_t manufacturer;
+        uint8_t version;
+        uint8_t encoding;
+        uint8_t bits_per_pixel;
+        uint16_t window_xmin;
+        uint16_t window_ymin;
+        uint16_t window_xmax;
+        uint16_t window_ymax;
+        uint16_t horiz_dpi;
+        uint16_t vert_dpi;
+        uint8_t colourmap[48];
+        uint8_t reserved;
+        uint8_t number_of_planes;
+        uint16_t bytes_per_line;
+        uint16_t palette_info;
+        uint16_t horiz_screen_size;
+        uint16_t vert_screen_size;
+        uint8_t filler[54];
+    } pcx_header_t;
+
+#pragma pack ()
 
 #ifdef __cplusplus
 }
-#endif /* __cplusplus */
+#endif
 
-#endif /* __LARGE_H */
+#endif /* PCX_H */
+
 
