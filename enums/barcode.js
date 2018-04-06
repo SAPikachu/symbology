@@ -8,6 +8,7 @@ module.exports = {
   CODE39: 8,
   EXCODE39: 9,
   EANX: 13,
+  EANX_CHK: 14,
   EAN128: 16,
   CODABAR: 18,
   CODE128: 20,
@@ -22,7 +23,9 @@ module.exports = {
   RSS_EXP: 31,
   TELEPEN: 32,
   UPCA: 34,
+  UPCA_CHK: 35,
   UPCE: 37,
+  UPCE_CHK: 38,
   POSTNET: 40,
   MSI_PLESSEY: 47,
   FIM: 49,
@@ -72,6 +75,9 @@ module.exports = {
   BARCODE_HIBC_MICPDF: 108,
   BARCODE_HIBC_BLOCKF: 110,
   BARCODE_HIBC_AZTEC: 112,
+  BARCODE_DOTCODE: 115,
+  BARCODE_HANXIN: 116,
+  BARCODE_MAILMARK: 121,
 
   /* Zint specific */
   BARCODE_AZRUNE: 128,
