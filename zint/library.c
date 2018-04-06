@@ -958,9 +958,10 @@ int ZBarcode_Encode(struct zint_symbol *symbol, const unsigned char *source, int
     if (symbol->symbology == 36) {
         symbol->symbology = BARCODE_UPCA;
     }
+    /*
     if (symbol->symbology == 38) {
         symbol->symbology = BARCODE_UPCE;
-    }
+    }*/
     if ((symbol->symbology >= 41) && (symbol->symbology <= 45)) {
         symbol->symbology = BARCODE_POSTNET;
     }
@@ -1204,6 +1205,16 @@ int ZBarcode_Print(struct zint_symbol *symbol, int rotate_angle) {
         output[2] = symbol->outfile[strlen(symbol->outfile) - 1];
         output[3] = '\0';
         to_upper((unsigned char*) output);
+
+        if (symbol->symbology == BARCODE_EANX_CHK) {
+            symbol->symbology = BARCODE_EANX;
+        }
+        if (symbol->symbology == BARCODE_UPCA_CHK) {
+            symbol->symbology = BARCODE_UPCA;
+        }
+        if (symbol->symbology == BARCODE_UPCE_CHK) {
+            symbol->symbology = BARCODE_UPCE;
+        }
 
         if (!(strcmp(output, "PNG"))) {
             if (symbol->scale < 1.0) {

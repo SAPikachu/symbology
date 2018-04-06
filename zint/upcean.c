@@ -150,9 +150,8 @@ int upca(struct zint_symbol *symbol, unsigned char source[], char dest[]) {
 /* UPC E is a zero-compressed version of UPC A */
 int upce(struct zint_symbol *symbol, unsigned char source[], char dest[]) {
     unsigned int i, num_system;
-    char emode, equivalent[12], check_digit, parity[8], temp[8];
-    char hrt[9];
-
+    char emode, equivalent[12], check_digit, parity[16], temp[16];
+    char hrt[16];
     /* Two number systems can be used - system 0 and system 1 */
     if (symbol->symbology != BARCODE_UPCE_CHK) {
         /* No check digit in input data */
