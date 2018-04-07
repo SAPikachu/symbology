@@ -673,7 +673,9 @@ int code_128(struct zint_symbol *symbol, unsigned char source[], const size_t le
         }
         total_sum += values[i];
     }
-    strcat(dest, C128Table[total_sum % 103]);
+    if (symbol->option_3 != 127) {
+        strcat(dest, C128Table[total_sum % 103]);
+    }
 
     /* Stop character */
     strcat(dest, C128Table[106]);
