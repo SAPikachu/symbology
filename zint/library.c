@@ -1155,7 +1155,7 @@ int ZBarcode_Encode(struct zint_symbol *symbol, const unsigned char *source, int
     }
 
     if (error_number == 0) {
-        if ((symbol->symbology == BARCODE_CODE128) || (symbol->symbology == BARCODE_CODE128B)) {
+        if (symbol->option_3 != 64 && (symbol->symbology == BARCODE_CODE128) || (symbol->symbology == BARCODE_CODE128B)) {
             for (i = 0; i < in_length; i++) {
                 if (local_source[i] == '\0') {
                     symbol->text[i] = ' ';
