@@ -116,7 +116,7 @@ namespace barnode {
 
     // basic symbology info and render size
     symbol->symbology = argToInt(*args[1]);
-    symbol->height = 0;//argToInt(*args[2]);
+    symbol->height = argToInt(*args[2]);
     symbol->whitespace_width = argToInt(*args[3]);
     symbol->border_width = argToInt(*args[4]);
 
