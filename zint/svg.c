@@ -78,6 +78,7 @@ int svg_plot(struct zint_symbol *symbol) {
     float fontsize = symbol->fontsize * scaler;
 #ifndef _MSC_VER
     unsigned char local_text[ustrlen(symbol->text) + 1];
+    unsigned char local_text_escaped[ustrlen(symbol->text) * 5 + 5];
 #else
     unsigned char* local_text = (unsigned char*) _alloca(ustrlen(symbol->text) + 1);
     unsigned char* local_text_escaped = (unsigned char*) _alloca(ustrlen(symbol->text) * 5 + 5);
