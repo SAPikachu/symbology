@@ -48,10 +48,10 @@ void svg_text_escape(const unsigned char* src, unsigned char* dst) {
         if (*src == '&') {
             strcpy(dst, "&amp;");
             dst += 5;
-        } else (*src == '<') {
+        } else if (*src == '<') {
             strcpy(dst, "&lt;");
             dst += 4;
-        } else (*src == '>') {
+        } else if (*src == '>') {
             strcpy(dst, "&gt;");
             dst += 4;
         } else {
