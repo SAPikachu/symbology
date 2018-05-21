@@ -43,6 +43,26 @@
 
 #define SSET	"0123456789ABCDEF"
 
+void svg_text_escape(const unsigned char* src, unsigned char* dst) {
+    while (*src) {
+        if (*src == '&') {
+            strcpy(dst, "&amp;");
+            dst += 5;
+        } else (*src == '<') {
+            strcpy(dst, "&lt;");
+            dst += 4;
+        } else (*src == '>') {
+            strcpy(dst, "&gt;");
+            dst += 4;
+        } else {
+            *dst = *src;
+            dst++;
+        }
+        src++;
+    }
+    *dst = '\0';
+}
+
 int svg_plot(struct zint_symbol *symbol) {
     int i, block_width, latch, r;
     float textpos, large_bar_height, preset_height, row_height, row_posn = 0.0;
@@ -60,6 +80,7 @@ int svg_plot(struct zint_symbol *symbol) {
     unsigned char local_text[ustrlen(symbol->text) + 1];
 #else
     unsigned char* local_text = (unsigned char*) _alloca(ustrlen(symbol->text) + 1);
+    unsigned char* local_text_escaped = (unsigned char*) _alloca(ustrlen(symbol->text) * 5 + 5);
 #endif
 
     row_height = 0;
@@ -233,7 +254,8 @@ int svg_plot(struct zint_symbol *symbol) {
     }
     fprintf(fsvg, "   xmlns=\"http://www.w3.org/2000/svg\">\n");
     if ((ustrlen(local_text) != 0) && (symbol->show_hrt != 0)) {
-        fprintf(fsvg, "   <desc>%s\n", local_text);
+        svg_text_escape(local_text, local_text_escaped);
+        fprintf(fsvg, "   <desc>%s\n", local_text_escaped);
     } else {
         fprintf(fsvg, "   <desc>Zint Generated Symbol\n");
     }
@@ -661,7 +683,8 @@ int svg_plot(struct zint_symbol *symbol) {
         textpos = symbol->width / 2.0;
         fprintf(fsvg, "      <text x=\"%.2f\" y=\"%.2f\" text-anchor=\"middle\"\n", (textpos + xoffset) * scaler, default_text_posn);
         fprintf(fsvg, "         font-family=\"Helvetica\" font-size=\"%.1f\" fill=\"#%s\" >\n", fontsize, symbol->fgcolour);
-        fprintf(fsvg, "         %s\n", local_text);
+        svg_text_escape(local_text, local_text_escaped);
+        fprintf(fsvg, "         %s\n", local_text_escaped);
         fprintf(fsvg, "      </text>\n");
     }
     fprintf(fsvg, "   </g>\n");
