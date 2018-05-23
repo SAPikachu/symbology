@@ -279,7 +279,13 @@ int itf14(struct zint_symbol *symbol, unsigned char source[], int length) {
     localstr[13] = check_digit(count);
     localstr[14] = '\0';
     error_number = interleaved_two_of_five(symbol, (unsigned char *) localstr, strlen(localstr));
-    ustrcpy(symbol->text, (unsigned char*) localstr);
+    memset(symbol->text, ' ', sizeof(symbol->text));
+    memcpy(symbol->text, localstr, 1);
+    memcpy(symbol->text + 2, localstr + 1, 2);
+    memcpy(symbol->text + 5, localstr + 3, 5);
+    memcpy(symbol->text + 11, localstr + 8, 5);
+    memcpy(symbol->text + 17, localstr + 13, 2);
+    // ustrcpy(symbol->text, (unsigned char*) localstr);
     return error_number;
 }
 
